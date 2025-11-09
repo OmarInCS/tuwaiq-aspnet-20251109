@@ -1,3 +1,10 @@
 Scaffold-DbContext "Server=YOUR_SERVER;Database=YOUR_DB;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
+-----------------
+
+https://youtu.be/zzLr5VxVf4o?si=bFPV2YBCakWqUv4P
+
+https://www.youtube.com/watch?v=3BFxALltQaM
+
+------------------
 
