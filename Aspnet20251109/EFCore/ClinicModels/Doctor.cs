@@ -23,5 +23,7 @@ namespace EFCore.ClinicModels {
         public int SpecialityNum { get; set; }
 
         public Speciality Speciality { get; set; }
+
+        public List<Appointment> Appointments { get; set; } = new();
     }
 }

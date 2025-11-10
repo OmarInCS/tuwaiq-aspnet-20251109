@@ -10,6 +10,8 @@ namespace EFCore.ClinicModels {
 
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer(
@@ -28,6 +30,10 @@ namespace EFCore.ClinicModels {
                 .HasOne(d => d.Speciality)
                 .WithMany(s => s.Doctors)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Appointment>()
+                .Property(a => a.CreatedAt)
+                .HasDefaultValueSql("GetDate()");
         }
     }
 }
