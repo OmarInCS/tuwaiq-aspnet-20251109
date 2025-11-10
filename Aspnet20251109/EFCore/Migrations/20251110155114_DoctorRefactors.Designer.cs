@@ -4,6 +4,7 @@ using EFCore.ClinicModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    partial class ClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20251110155114_DoctorRefactors")]
+    partial class DoctorRefactors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,47 +47,9 @@ namespace EFCore.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasDefaultValue("Alfulani");
 
-                    b.Property<int>("SpecialityNum")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecialityNum");
-
                     b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("EFCore.ClinicModels.Speciality", b =>
-                {
-                    b.Property<int>("Code")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Code");
-
-                    b.ToTable("Specialities");
-                });
-
-            modelBuilder.Entity("EFCore.ClinicModels.Doctor", b =>
-                {
-                    b.HasOne("EFCore.ClinicModels.Speciality", "Speciality")
-                        .WithMany("Doctors")
-                        .HasForeignKey("SpecialityNum")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Speciality");
-                });
-
-            modelBuilder.Entity("EFCore.ClinicModels.Speciality", b =>
-                {
-                    b.Navigation("Doctors");
                 });
 #pragma warning restore 612, 618
         }
