@@ -34,6 +34,13 @@ namespace EFCore.ClinicModels {
             modelBuilder.Entity<Appointment>()
                 .Property(a => a.CreatedAt)
                 .HasDefaultValueSql("GetDate()");
+
+            modelBuilder.Entity<Speciality>()
+                .HasData([
+                    new Speciality { Code = 1, Name = "Orthopidcs"},
+                    new Speciality { Code = 2, Name = "Dental" },
+                    new Speciality { Code = 3, Name = "Pediatric" }
+                    ]);
         }
     }
 }
