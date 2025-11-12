@@ -1,0 +1,15 @@
+﻿@model List<Patient>
+
+<h1>
+    Patients
+</h1>
+
+<ol>
+    @foreach (var p in Model) {
+        <li>
+            <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.Id">
+                @p.FullName
+            </a>
+        </li>
+    }
+</ol>
