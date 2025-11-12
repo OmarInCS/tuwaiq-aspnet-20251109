@@ -1,0 +1,26 @@
+﻿@model Patient
+
+<form method="post">
+    <div>
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" />
+    </div>
+    <div>
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" type="date" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" />
+    </div>
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" type="tel" />
+    </div>
+    <div>
+        <label asp-for="NationalId"></label>
+        <input asp-for="NationalId" type="tel" />
+    </div>
+
+    <button type="submit">Register</button>
+</form>

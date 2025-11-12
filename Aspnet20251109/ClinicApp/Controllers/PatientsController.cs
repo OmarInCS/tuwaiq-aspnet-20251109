@@ -15,5 +15,21 @@ namespace ClinicApp.Controllers {
             return View(patient);
         }
 
+        public IActionResult Register() {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(Patient p) {
+            
+            if (!ModelState.IsValid) {
+                return View(p);
+            }
+
+            p.Id = Constants.Patients.Select(p => p.Id).Max() + 1;
+            Constants.Patients.Add(p);
+            return RedirectToAction("Details", new { id = p.Id });
+        }
+
     }
 }
