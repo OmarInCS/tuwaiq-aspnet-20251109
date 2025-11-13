@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,23 +13,33 @@ namespace ClinicApp.Models {
         public int Id { get; set; }
 
         [MaxLength(150)]
-        [Display(Name = "Full Name")]
         public string FullName { get; set; } = null!;
 
-        [MaxLength(10), RegularExpression("[12]\\d{9}", ErrorMessage = "The input should be in the form 1xxxxxxxxx or 2xxxxxxx")]
+        [MaxLength(10)]
         public string NationalId { get; set; } = null!;
 
-        [MaxLength(150), EmailAddress]
+        [MaxLength(150)]
         public string Email { get; set; } = null!;
 
         [MaxLength(10), MinLength(10)]
         public string PhoneNumber { get; set; } = null!;
 
         //[Column(TypeName = "date")]
-        [Display(Name = "Date of birth")]
         public DateOnly DateOfBirth { get; set; }
 
         public List<Appointment> Appointments { get; set; } = new();
+
+
+        public PatientVM ToPatientVM() {
+            return new PatientVM {
+                Id = Id,
+                FullName = FullName,
+                NationalId = NationalId,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                DateOfBirth = DateOfBirth,
+            };
+        }
 
     }
 }

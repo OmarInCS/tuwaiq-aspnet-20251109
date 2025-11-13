@@ -1,4 +1,5 @@
 ﻿using ClinicApp.Models;
+using ClinicApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicApp.Controllers {
@@ -6,12 +7,12 @@ namespace ClinicApp.Controllers {
 
 
         public IActionResult Index() {
-            var patients = Constants.Patients;
+            var patients = Constants.Patients.Select(p => p.ToPatientVM()).ToList();
             return View(patients);
         }
 
         public IActionResult Details(int id) {
-            var patient = Constants.Patients.Single(p => p.Id == id);
+            var patient = Constants.Patients.Single(p => p.Id == id).ToPatientVM();
             return View(patient);
         }
 
@@ -20,12 +21,13 @@ namespace ClinicApp.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Register(Patient p) {
+        public IActionResult Register(PatientCreateVM vm) {
             
             if (!ModelState.IsValid) {
-                return View(p);
+                return View(vm);
             }
 
+            var p = vm.ToModel();
             p.Id = Constants.Patients.Select(p => p.Id).Max() + 1;
             Constants.Patients.Add(p);
             return RedirectToAction("Details", new { id = p.Id });
