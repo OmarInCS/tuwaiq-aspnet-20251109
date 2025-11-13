@@ -12,9 +12,10 @@ namespace ClinicApp.Models {
         public int Id { get; set; }
 
         [MaxLength(150)]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; } = null!;
 
-        [MaxLength(10), RegularExpression("[12]\\d{9}")]
+        [MaxLength(10), RegularExpression("[12]\\d{9}", ErrorMessage = "The input should be in the form 1xxxxxxxxx or 2xxxxxxx")]
         public string NationalId { get; set; } = null!;
 
         [MaxLength(150), EmailAddress]
@@ -24,6 +25,7 @@ namespace ClinicApp.Models {
         public string PhoneNumber { get; set; } = null!;
 
         //[Column(TypeName = "date")]
+        [Display(Name = "Date of birth")]
         public DateOnly DateOfBirth { get; set; }
 
         public List<Appointment> Appointments { get; set; } = new();
