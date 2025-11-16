@@ -1,4 +1,11 @@
+using ClinicApp.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ClinicContext>(options => options.UseSqlServer(connStr));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
