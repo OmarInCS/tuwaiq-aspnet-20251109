@@ -1,4 +1,4 @@
-﻿@model List<PatientVM>
+﻿@model PatientFilteredListVM
 
 <h1>
     Patients
@@ -8,8 +8,27 @@
     Register
 </a>
 
+<form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="form-floating mb-2 col-12">
+        <input class="form-control" asp-for="Filter.Id" />
+        <label asp-for="Filter.Id"></label>
+    </div>
+    <div class="form-floating mb-2 col-12">
+        <input class="form-control" asp-for="Filter.FullName" />
+        <label asp-for="Filter.FullName"></label>
+    </div>
+    <div class="form-floating mb-2 col-12">
+        <input class="form-control" asp-for="Filter.NationalId" />
+        <label asp-for="Filter.NationalId"></label>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
 <ol>
-    @foreach (var p in Model) {
+    @foreach (var p in Model.Patients) {
         <li>
             <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.Id">
                 @p.FullName

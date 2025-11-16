@@ -13,9 +13,15 @@ namespace ClinicApp.Controllers {
         }
 
 
-        public IActionResult Index() {
-            var patients = _db.Patients.Select(p => p.ToPatientVM()).ToList();
-            return View(patients);
+        public IActionResult Index(PatientFilteredListVM vm) {
+
+            var patients = _db.Patients
+                            .Where(p => vm.Filter.Id == null || p.Id == vm.Filter.Id)
+                            .Where(p => vm.Filter.NationalId == null || p.NationalId == vm.Filter.NationalId)
+                            .Where(p => vm.Filter.FullName == null || p.FullName.Contains(vm.Filter.FullName))
+                            .Select(p => p.ToPatientVM()).ToList();
+
+            return View(new PatientFilteredListVM { Patients = patients, Filter = vm.Filter });
         }
 
         public IActionResult Details(int id) {
