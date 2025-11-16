@@ -1,8 +1,8 @@
-﻿@model PatientCreateVM
+﻿@model PatientUpdateVM
 
 <form method="post">
     <h5 class="card-title">
-        Register Patient
+        Update Patient
     </h5>
     <div class="form-floating mb-2">
         <input class="form-control" asp-for="FullName" />
@@ -30,7 +30,7 @@
         <span class="text-danger" asp-validation-for="NationalId"></span>
     </div>
 
-    <button class="btn btn-primary" type="submit">Register</button>
+    <button class="btn btn-primary" type="submit">Save</button>
 </form>
 
 @section Scripts {

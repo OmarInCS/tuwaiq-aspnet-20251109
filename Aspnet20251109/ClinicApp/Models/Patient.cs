@@ -41,5 +41,15 @@ namespace ClinicApp.Models {
             };
         }
 
+        public PatientUpdateVM ToPatientUpdateVM() {
+            return new PatientUpdateVM {
+                FullName = FullName,
+                NationalId = NationalId,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                DateOfBirth = DateOfBirth,
+            };
+        }
+
     }
 }

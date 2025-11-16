@@ -14,6 +14,9 @@
             <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.Id">
                 @p.FullName
             </a>
+            <a class="btn btn-primary btn-sm ms-5" asp-controller="Patients" asp-action="Update" asp-route-id="@p.Id">
+                <i class="bi bi-pencil-square"></i>
+            </a>
             <a class="btn btn-danger btn-sm ms-5 js-btn-delete" data-id="@p.Id">
                 <i class="bi bi-person-x-fill"></i>
             </a>
