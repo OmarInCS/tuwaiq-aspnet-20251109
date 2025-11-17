@@ -26,6 +26,8 @@
     }
 </ol>
 
+<partial name="_Pagination" model="Model.Filter"/>
+
 @section Scripts {
 
     <script>
@@ -46,6 +48,14 @@
                     }
                 })
             }
+        });
+
+        $(".js-page-link").on("click", function () {
+
+            var page = $(this).data("page");
+            $("#patient-filter-form #Page").val(page);
+            $("#patient-filter-form").submit();
+
         });
     </script>
 

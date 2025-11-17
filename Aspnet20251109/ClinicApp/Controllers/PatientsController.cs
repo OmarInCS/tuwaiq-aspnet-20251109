@@ -15,10 +15,17 @@ namespace ClinicApp.Controllers {
 
         public IActionResult Index(PatientFilterVM vm) {
 
-            var patients = _db.Patients
+            var initQuery = _db.Patients
                             .Where(p => vm.Id == null || p.Id == vm.Id)
                             .Where(p => vm.NationalId == null || p.NationalId == vm.NationalId)
-                            .Where(p => vm.FullName == null || p.FullName.Contains(vm.FullName))
+                            .Where(p => vm.FullName == null || p.FullName.Contains(vm.FullName));
+
+            vm.TotalCount = initQuery.Count();
+
+            var patients = initQuery
+                            .OrderBy(p => p.Id)
+                            .Skip((vm.Page - 1) * vm.PageSize)
+                            .Take(vm.PageSize)
                             .Select(p => p.ToPatientVM()).ToList();
 
             return View(new PatientFilteredListVM { Patients = patients, Filter = vm });

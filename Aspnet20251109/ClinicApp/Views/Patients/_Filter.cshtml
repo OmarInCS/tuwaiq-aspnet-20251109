@@ -1,7 +1,7 @@
 ﻿@model PatientFilterVM
 
 
-<form class="row row-cols-lg-auto g-3 align-items-center">
+<form class="row row-cols-lg-auto g-3 align-items-center" id="patient-filter-form">
     <div class="form-floating mb-2 col-12">
         <input class="form-control" asp-for="Id" />
         <label asp-for="Id"></label>
@@ -14,6 +14,9 @@
         <input class="form-control" asp-for="NationalId" />
         <label asp-for="NationalId"></label>
     </div>
+    
+    <input type="hidden" asp-for="Page"/>
+    
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
