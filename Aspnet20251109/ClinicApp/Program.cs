@@ -1,4 +1,5 @@
 using ClinicApp.Models;
+using ClinicApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ClinicContext>(options => options.UseSqlServer(connStr));
+
+
+// Singleton, Scoped, Transiant
+builder.Services.AddScoped<PatientsService>();
+builder.Services.AddScoped<AnotherService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

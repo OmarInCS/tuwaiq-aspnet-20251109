@@ -1,4 +1,5 @@
 ﻿using ClinicApp.Models;
+using ClinicApp.Services;
 using ClinicApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace ClinicApp.Controllers {
 
         private readonly ClinicContext _db;
 
-        public PatientsController(ClinicContext db)
+        public PatientsController(ClinicContext db, PatientsService patService, AnotherService anotherService)
         {
             _db = db;
         }
