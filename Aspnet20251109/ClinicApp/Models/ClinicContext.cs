@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClinicApp.Models {
-    public class ClinicContext : DbContext {
+    public class ClinicContext : IdentityDbContext<IdentityUser> {
 
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
@@ -18,6 +20,24 @@ namespace ClinicApp.Models {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<IdentityUser>(e => e.ToTable("Users"));
+            modelBuilder.Entity<IdentityRole>(e => e.ToTable("Roles"));
+            modelBuilder.Entity<IdentityUserRole<string>>(e => e.ToTable("UserRoless"));
+            modelBuilder.Entity<IdentityUserClaim<string>>(e => e.ToTable("UserClaims"));
+            modelBuilder.Entity<IdentityUserLogin<string>>(e => e.ToTable("UserLogins"));
+            modelBuilder.Entity<IdentityUserToken<string>>(e => e.ToTable("UserTokens"));
+            modelBuilder.Entity<IdentityRoleClaim<string>>(e => e.ToTable("RoleClaims"));
+
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole { Id = "ad90e18a-ab7f-4bb0-9f73-5778de3b4a1f", Name = AppRoles.APP_ADMIN.ToString(), NormalizedName = AppRoles.APP_ADMIN.ToString(), ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f73-5778de3b4a1f" },
+                    new IdentityRole { Id = "ad90e18a-ab7f-4bb0-9f74-5778de3b4a1f", Name = AppRoles.DOCTOR.ToString(), NormalizedName = AppRoles.DOCTOR.ToString(), ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f74-5778de3b4a1f" },
+                    new IdentityRole { Id = "ad90e18a-ab7f-4bb0-9f75-5778de3b4a1f", Name = AppRoles.RECEPTIONIST.ToString(), NormalizedName = AppRoles.RECEPTIONIST.ToString(), ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f75-5778de3b4a1f" }
+                );
+
 
             modelBuilder.Entity<Doctor>()
                 .Property(d => d.LastName)

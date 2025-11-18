@@ -4,6 +4,7 @@ using ClinicApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicApp.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    partial class ClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20251118160605_IdentityTables")]
+    partial class IdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,29 +188,6 @@ namespace ClinicApp.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ad90e18a-ab7f-4bb0-9f73-5778de3b4a1f",
-                            ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f73-5778de3b4a1f",
-                            Name = "APP_ADMIN",
-                            NormalizedName = "APP_ADMIN"
-                        },
-                        new
-                        {
-                            Id = "ad90e18a-ab7f-4bb0-9f74-5778de3b4a1f",
-                            ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f74-5778de3b4a1f",
-                            Name = "DOCTOR",
-                            NormalizedName = "DOCTOR"
-                        },
-                        new
-                        {
-                            Id = "ad90e18a-ab7f-4bb0-9f75-5778de3b4a1f",
-                            ConcurrencyStamp = "ad90e18a-ab7f-4bb0-9f75-5778de3b4a1f",
-                            Name = "RECEPTIONIST",
-                            NormalizedName = "RECEPTIONIST"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
