@@ -1,3 +1,4 @@
+using ClinicApp.Helpers;
 using ClinicApp.Models;
 using ClinicApp.Services;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,11 @@ builder.Services.AddDbContext<ClinicContext>(options => options.UseSqlServer(con
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ClinicContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = "/Auth/Login";
+    options.AccessDeniedPath = "/Auth/AccessDenied";
+});
 
 
 // Singleton, Scoped, Transiant
@@ -42,5 +48,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+await AdminSeeder.SeedAdminUser(app);
 
 app.Run();
