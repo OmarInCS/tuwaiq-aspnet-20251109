@@ -1,4 +1,6 @@
-﻿using ClinicApp.ViewModels;
+﻿using ClinicApp.Helpers;
+using ClinicApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,5 +49,42 @@ namespace ClinicApp.Controllers {
             await _signInManager.SignOutAsync();
             return Redirect("/");
         }
+
+        [Authorize(Roles = "APP_ADMIN")]
+        public async Task<IActionResult> Create() {
+            return View();
+        }
+
+        [Authorize(Roles = "APP_ADMIN")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UserCreateVM vm) {
+
+            if (!ModelState.IsValid) {
+                return View(vm);
+            }
+
+            var user = new IdentityUser {
+                Email = vm.Email,
+                UserName = vm.Email.Split("@")[0]
+            };
+
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            if (!result.Succeeded) {
+                ModelState.AddModelError(string.Empty, "Create user failed");
+                return View(vm);
+            }
+
+            result = await _userManager.AddToRoleAsync(user, vm.Role);
+            if (!result.Succeeded) {
+                ModelState.AddModelError("Role", "Failed to add role");
+                return View(vm);
+            }
+
+
+            return Redirect("/");
+        }
+
     }
 }
