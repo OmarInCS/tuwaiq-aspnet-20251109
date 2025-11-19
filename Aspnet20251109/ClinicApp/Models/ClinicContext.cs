@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ClinicApp.Models
 {
-    public class ClinicContext : IdentityDbContext<IdentityUser> {
+    public class ClinicContext : IdentityDbContext<AppUser> {
 
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
@@ -24,7 +24,7 @@ namespace ClinicApp.Models
             base.OnModelCreating(modelBuilder);
 
 
-            modelBuilder.Entity<IdentityUser>(e => e.ToTable("Users"));
+            modelBuilder.Entity<AppUser>(e => e.ToTable("Users"));
             modelBuilder.Entity<IdentityRole>(e => e.ToTable("Roles"));
             modelBuilder.Entity<IdentityUserRole<string>>(e => e.ToTable("UserRoless"));
             modelBuilder.Entity<IdentityUserClaim<string>>(e => e.ToTable("UserClaims"));

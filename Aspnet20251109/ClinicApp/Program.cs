@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ClinicContext>(options => options.UseSqlServer(connStr));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<ClinicContext>()
     .AddDefaultTokenProviders();
 

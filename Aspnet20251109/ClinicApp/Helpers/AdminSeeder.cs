@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ClinicApp.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ClinicApp.Helpers {
     public static class AdminSeeder {
@@ -7,7 +8,7 @@ namespace ClinicApp.Helpers {
         public static async Task SeedAdminUser(WebApplication app) {
             // Create scope
             var scope = app.Services.CreateScope();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
             var adminEmail = "admin@clinic.com";
             var adminPasword = "Admin@123456";
@@ -16,7 +17,7 @@ namespace ClinicApp.Helpers {
             var admin = await userManager.FindByEmailAsync(adminEmail);
             if (admin == null) {
                 // Create admin user
-                admin = new IdentityUser {
+                admin = new AppUser {
                     Email = adminEmail,
                     UserName = adminEmail.Split("@")[0],
                     EmailConfirmed = true

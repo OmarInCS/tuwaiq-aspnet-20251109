@@ -1,7 +1,7 @@
 ﻿@using ClinicApp.Helpers
 @model UserCreateVM
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <h5 class="card-title">
         Create User
     </h5>
@@ -28,6 +28,12 @@
         </select>
         <label asp-for="Role"></label>
         <span class="text-danger" asp-validation-for="Role"></span>
+    </div>
+
+    <div class="form-floating mb-2">
+        <input class="form-control" asp-for="ProfilePicture" type="file" accept=".jpg,.png"/>
+        <label asp-for="ProfilePicture"></label>
+        <span class="text-danger" asp-validation-for="ProfilePicture"></span>
     </div>
     
 
